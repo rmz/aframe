@@ -25,6 +25,28 @@
         rotation="90 0 0"
         gps-entity-place="latitude: 40.646930; longitude: -73.966110;"
       ></a-text>
+      
+      <!-- Addition of video -->
+      <a-assets>
+      <video
+          id="video"
+          autoplay
+          loop
+          poster="video/gob.png"
+          crossorigin="anonymous"
+        >
+        <source src="video/gob.mp4" type="video/mp4">
+        </a-assets>
+        
+        <a-plane
+        rotation="30 45 0"
+        width="6"
+        height="3"
+        src="#video"
+        gps-entity-place="latitude: 40.646930; longitude: -73.966110;"
+      ></a-plane>
+        <!-- end of video addition -->
+        
       <a-camera gps-camera rotation-reader> </a-camera>
     </a-scene>
   </body>
