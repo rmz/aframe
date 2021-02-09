@@ -1,0 +1,56 @@
+<html>
+<head>
+  <title>Sound Component</title>
+
+  <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+  <script src="https://unpkg.com/aframe-event-set-component@3.0.3/dist/aframe-event-set-component.min.js"></script>
+
+  <!-- https://aframe.io/docs/1.2.0/components/sound.html -->
+  <script>
+      AFRAME.registerComponent('sound-events', {
+        init: function () {
+          var el = this.el;  // <a-box>
+          el.addEventListener('mouseenter', function () {
+            el.components.sound.playSound();
+          });
+          el.addEventListener('mouseleave', function () {
+            el.components.sound.pauseSound();
+          });
+        }
+      });
+      //there is also a-video primitive
+      //https://aframe.io/docs/1.2.0/primitives/a-video.html
+    </script>
+</head>
+
+<body>
+  <a-scene>
+    <a-assets>
+      <!-- preload sound in a-assets tags -->
+      <audio id="wind" src="audio/wind.mp3" preload="auto"></audio>
+
+      <audio id="stimulus" src="audio/stimulus.mp3" preload="auto"></audio> -->
+    </a-assets>
+
+    <!-- adding sound to a primitive -->
+    <!--
+    <a-entity id="river" geometry="primitive: plane" material="color: blue"
+          position="0 1 -1" sound="src: url(wind.mp3); autoplay: true; loop:true"></a-entity>
+    -->
+
+    <!-- Using an event to trigger sound -->
+    <a-camera>
+      <!-- 2D Web cursor events are synthetic with WebVR and A-Frame
+          https://aframe.io/docs/1.2.0/components/cursor.html -->
+      <a-cursor></a-cursor>
+    </a-camera>
+
+    <a-box position="0 1.5 -2" rotation="0 45 30" material="src: img/allSee.gif"
+                sound="src: #wind; on: click"></a-box>
+
+    <a-box position="2 1.5 -2" material="src: img/allSee.gif"
+                sound="src: #stimulus" sound-events></a-box>
+
+  </a-scene>
+</body>
+</html>

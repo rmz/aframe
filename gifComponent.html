@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+    <title>A-Frame Play GIF</title>
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <!-- https://github.com/mayognaise/aframe-gif-component -->
+    <script src="https://rawgit.com/mayognaise/aframe-gif-shader/master/dist/aframe-gif-shader.min.js"></script>
+    <script src="https://rawgit.com/mayognaise/aframe-gif-component/master/dist/aframe-gif-component.min.js"></script>
+    <script>
+      AFRAME.registerComponent('handle-events', {
+        init: function () {
+          var el = querySelector('a-scene');  // <a-box>
+          el.querySelector('#audio1').addEventListener('mouseenter', function () {
+            el.querySelector('#audio1').setAttribute('color', '#24CAFF');
+          });
+          el.addEventListener('mouseleave', function () {
+            el.setAttribute('color', 'white');
+            el.setAttribute('scale', {x: 1, y: 1, z: 1});
+          });
+          el.addEventListener('click', function () {
+            el.setAttribute('scale', {x: 2, y: 1, z: 2});
+          });//add if statement to reset scale
+        }
+      });
+
+      AFRAME.registerComponent('rotato', {
+        //https://aframe.io/docs/1.1.0/introduction/best-practices.html#tick-handlers
+        tick: function()
+        {
+          this.el.object3D.rotation.y -= 0.028049;
+        }
+      });
+    </script>
+
+  </head>
+
+<body>
+  <a-scene>
+    <a-assets>
+      <img id="allSee" src="img/allSee.gif">
+
+      <!-- https://mixkit.co/free-sound-effects/ -->
+      <audio id="background" src="wind3.mp3"></audio>
+
+    </a-assets>
+
+    <!-- First box does not animate, A-Frame by default does not support gif animation
+      oapcity using material attribute -
+      https://aframe.io/docs/1.2.0/components/material.html
+      https://codepen.io/bryik/pen/pyMoGb -->
+    <a-box position="-3 1.5 -3" src="#allSee" material="transparent:true; opacity:0.9"></a-box>
+    <a-box id="audio1" position="0 1.5 -3"  material="shader:gif; src:url(img/allSee.gif); transparent:true; opacity:0.5" gif=""  rotato handle-events></a-box>
+    <!-- the plane is not seen from behind unless side:double is used -->
+    <a-plane position="3 1.5 -3"  material="side:double; shader:gif; src:url(img/allSee.gif);" gif="" handle-events></a-plane>
+
+    <a-camera>
+      <!-- 2D Web cursor events are synthetic with WebVR and A-Frame -->
+      <a-cursor></a-cursor>
+    </a-camera>
+
+    <!-- Present a ground and sky to orient the viewer -->
+    <!-- about color:
+      https://www.w3schools.com/colors/colors_names.asp
+      https://color.adobe.com/create/color-wheel -->
+    <a-sky color="deepskyblue"></a-sky>
+    <a-plane color="#A64000" rotation="-90 0 0" width="500" height="500"></a-plane>
+    <a-sound
+      src="#background"
+      autoplay="true"
+      position="0 0 0"
+      loop="true"></a-sound>
+  </a-scene>
+</body>
+</html>
