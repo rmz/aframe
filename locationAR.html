@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Location-based AR.js demo</title>
     <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
     <script src="https://unpkg.com/aframe-look-at-component@0.8.0/dist/aframe-look-at-component.min.js"></script>
@@ -16,35 +16,14 @@
       embedded
       arjs="sourceType: webcam; debugUIEnabled: false;"
     >
-      <!-- Addition of images or video or audio -->
-      <a-assets>
-        <img
-          src="https://i0.wp.com/bdtechtalks.com/wp-content/uploads/2019/07/robot-hand-artificial-intelligence.jpg"
-          id="robot"
-          crossorigin="anonymous"
-          />
-      </a-assets>
-    <!-- get latitude, longitude - https://www.latlong.net/
-         rotaion not doing anything -->
+    <!-- get latitude, longitude - https://www.latlong.net/ -->
       <a-text
-        value="Can we add an image?"
+        value="This content will always face you."
         look-at="[gps-camera]"
-        scale="12 12 12"
+        scale="50 50 50"
         rotation="90 0 0"
         gps-entity-place="latitude: 40.646930; longitude: -73.966110;"
       ></a-text>
-        
-        <a-plane
-          look-at="[gps-camera]"
-          position="-1 1 -3"
-          rotation="0 -45 0"
-          width="3"
-          height="1.5"
-          src="#robot"
-          gps-entity-place="latitude: 40.646930; longitude: -73.966110;"
-      ></a-plane>
-        <!-- end of video addition -->
-        
       <a-camera gps-camera rotation-reader> </a-camera>
     </a-scene>
   </body>
