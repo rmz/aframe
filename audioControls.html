@@ -5,7 +5,8 @@
   <title>Sound Component</title>
 
   <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
-  <script src="https://unpkg.com/aframe-event-set-component@3.0.3/dist/aframe-event-set-component.min.js"></script>
+  <!-- one of many distribution networks -->
+  <script src="https://cdn.jsdelivr.net/npm/aframe-event-set-component@5.0.0/dist/aframe-event-set-component.min.js"></script>
 
   <!-- https://aframe.io/docs/1.2.0/components/sound.html -->
   <script>
@@ -28,6 +29,8 @@
 <body>
   <a-scene>
     <a-assets>
+      <img id="allSee" src="img/allSee.gif">
+
       <!-- preload sound in a-assets tags -->
       <audio id="wind" src="audio/wind.mp3" preload="auto"></audio>
 
@@ -47,10 +50,10 @@
       <a-cursor></a-cursor>
     </a-camera>
 
-    <a-box position="0 1.5 -2" rotation="0 45 30" material="src: img/allSee.gif"
+    <a-box position="0 1.5 -2" rotation="0 45 30" src="#allSee"
                 sound="src: #wind; on: click"></a-box>
 
-    <a-box position="2 1.5 -2" material="src: img/allSee.gif"
+    <a-box position="2 1.5 -2" src="#allSee"
                 sound="src: #stimulus" sound-events></a-box>
 
   </a-scene>

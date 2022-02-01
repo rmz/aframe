@@ -6,12 +6,12 @@
     <title>A-Frame Cursor Event: Display Text</title>
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
     <!-- An A-Frame component to register event listeners that set properties. -->
-    <script src="https://unpkg.com/aframe-event-set-component@3.0.3/dist/aframe-event-set-component.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/aframe-event-set-component@5.0.0/dist/aframe-event-set-component.min.js"></script>
   </head>
   <body>
     <a-scene>
       <a-cylinder
-        position="1 0.75 -3"
+        position="1 1 -3"
         radius="0.5"
         height="1.5"
         color="#FFC65D"
@@ -33,6 +33,8 @@
       <a-camera>
         <a-cursor></a-cursor>
       </a-camera>
+      <a-sky color="lightskyblue"></a-sky>
+      <a-plane color="brown" rotation="-90 0 0" width="500" height="500"></a-plane>
     </a-scene>
   </body>
 </html>
