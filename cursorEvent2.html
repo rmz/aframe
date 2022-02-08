@@ -5,7 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>A-Frame Cursor Event: Display Text</title>
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
-    <!-- An A-Frame component to register event listeners that set properties. -->
+    <!-- An A-Frame component to register event listeners that set properties.
+        lines 21 and 22 use the event set component to:
+        The event set component can register multiple event handlers that set multiple properties
+        https://www.npmjs.com/package/aframe-event-set-component -->
     <script src="https://cdn.jsdelivr.net/npm/aframe-event-set-component@5.0.0/dist/aframe-event-set-component.min.js"></script>
   </head>
   <body>
@@ -18,6 +21,7 @@
         event-set__enter="_event: mouseenter; _target: #cylinderText; visible: true"
         event-set__leave="_event: mouseleave; _target: #cylinderText; visible: false"
       >
+        <!-- text nested in a-cylinder tag to be one object -->
         <a-text
           id="cylinderText"
           value="This is a cylinder"
@@ -33,8 +37,11 @@
       <a-camera>
         <a-cursor></a-cursor>
       </a-camera>
+
       <a-sky color="lightskyblue"></a-sky>
-      <a-plane color="brown" rotation="-90 0 0" width="500" height="500"></a-plane>
+
+      <a-plane color="brown" rotation="-90 0 0" width="10" height="10"></a-plane>
+
     </a-scene>
   </body>
 </html>
