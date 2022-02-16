@@ -25,6 +25,9 @@
 <body>
   <a-scene>
     <a-assets>
+      <!-- Textures must be divisible by 2 and ideally they are square or a 1:2 rectangle
+        For the web ideal texture dimensions are: 256x256, 512x512, 1024x1024, 2048x2048
+        The gif below was not created to be a texture and gets stretched -->
       <img id="allSee" src="img/allSee.gif">
 
       <!-- https://mixkit.co/free-sound-effects/ -->
@@ -62,7 +65,7 @@
       loop="true"
       volume="1.0">
     </a-sound>
-    
+
   </a-scene>
 </body>
 </html>
