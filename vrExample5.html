@@ -4,22 +4,6 @@
     <title>We're All From Somewhere</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    
-    <style>
-      #human:hover {cursor: wait;}
-    </style>
-
-    <script>
-      // WebXR requires HTTPS, so the site doesn't work if someone manually enters
-      // the URL and ends up using HTTP. To work around this, force redirect from
-      // http to https for non-localhost addresses.
-      if (window.location.protocol == "http:" &&
-          window.location.hostname != "localhost" &&
-          window.location.hostname != "127.0.0.1" &&
-          window.location.hostname != "[::1]") {
-        window.location = window.location.href.replace('http:', 'https:');
-      }
-    </script>
 
     <!-- super-sky doesn't work with latest A-Frame release 1.7.0  -->
     <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
@@ -41,17 +25,23 @@
     <!-- Star system -->
     <script src="https://cdn.jsdelivr.net/gh/matthewbryancurtis/aframe-star-system-component@db4f1030/index.js"></script>
 
-    <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-gltf-model-plus@1.0.0/dist/gltf-model-plus.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-gltf-model-plus@a41e57d/dist/aframe-master-custom-r172.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-gltf-model-plus@1.1.0/dist/gltf-model-plus.min.js"></script>
 
     <script>
       AFRAME.registerComponent('sound-events', {
         init: function () {
           var el = this.el;
+          let isPlaying = false;
+
           el.addEventListener('click', function () {
-            el.components.sound.playSound();
-          });
-          el.addEventListener('mouseleave', function () {
-            el.components.sound.pauseSound();
+          if(isPlaying) {
+              el.components.sound.pauseSound();
+              isPlaying = false;
+            } else {
+              el.components.sound.playSound();
+              isPlaying = true;
+            }
           });
         }
       });
@@ -62,8 +52,10 @@
 
     <a-scene fog="type: linear; color: yellow; density: 0.005">
       <a-assets>
-        <!-- <a-asset-item id="human" src="img/lowpolyMale/scene.gltf"></a-asset-item> 
-        <a-asset-item id="human" src="img/mixamoLouiseIdle.fbx"></a-asset-item> -->
+        <!-- https://sketchfab.com/3d-models/elephant-animation-idle-a8e7e10f005f4baab0a2f5079d759fcd -->
+        <a-asset-item id="elephant" src="img/elephant/scene.gltf"></a-asset-item>
+        
+        <a-asset-item id="human" src="img/lowpolyMale/scene.gltf"></a-asset-item>
 
         <audio id="human01" src="audio/esfuerzo03.mp3" preload="auto"></audio>
       </a-assets>
@@ -72,7 +64,7 @@
       <a-entity id="rig"
                 movement-controls="constrainToNavMesh: true;
                                    controls: checkpoint, gamepad, trackpad, keyboard, nipple;"
-                position="-7 0 10">
+                position="0 0 0">
         <a-entity camera
                   position="0 1.6 0"
                   look-controls="pointerLockEnabled: true">
@@ -86,24 +78,6 @@
       orbitduration="3"
       groundcolor="#7BC8A4">
       </a-super-sky>
-
-      <!-- camera replaced by rig entity
-      <a-camera>
-        <a-cursor></a-cursor>
-      </a-camera>
-    -->
-
-      <!-- Ready-made environments include:
-      contact
-      egypt
-      yavapai
-      arches
-      dream
-      <a-entity environment="preset: contact; lighting: none; shadow: none; lightPosition: 0 2.15 0"></a-entity>
-      horizonColor: blue; 
-      ground: hills; 
-      groundColor: brown; 
-      groundTexture: walkernoise-->
        
       <a-entity environment="
       preset: default; 
@@ -116,17 +90,22 @@
 
       <a-entity light="type: point; intensity: 1.0; position=1 3 -5"></a-entity>
 
-      <!--
       <a-gltf-model src="#human"
         scale="1.5 1.5 1.5"
-        position="1 1 -5"
+        position="-5 1.5 -10"
+        rotation="0 60 0"
         sound="src: #human01"
         sound-events>
       </a-gltf-model>
-    -->
 
-    <a-entity fbx-model="src: url(https://rmz.nyc/xr/mixamoLouiseIdle.fbx);" scale="1.5 1.5 1.5"
-        position="1 1 -5"></a-entity> 
+    <a-gltf-model src="#elephant"
+        scale="0.1 0.1 0.1"
+        position="0 0.5 -40"
+        rotation="0 0 0"
+        sound="src: #human01"
+        animation-mixer="clip: idle"
+        sound-events>
+      </a-gltf-model>
 
 
     </a-scene>
